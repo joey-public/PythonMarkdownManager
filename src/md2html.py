@@ -5,7 +5,7 @@ import markdown
 from fileio import read_txt_file_content, save_str_to_file 
 import headers as headers
 
-EXTENSIONS=['fenced_code', 'tables']
+EXTENSIONS=['fenced_code', 'tables', 'md_mermaid']
 
 def _parse_args(argv:list)->list:
     usage_str = 'usage: python md2html.py <input.md> <output_dir>'
@@ -34,7 +34,14 @@ def _parse_args(argv:list)->list:
 
 def _generate_html_header(config:dict)->str:
     header = '<header>\n'
-    header += headers.MDX_HTML_HEADER
+    if config['css_style_path'] != '':
+        css_style_path = config['css_style_path']
+        header += f'<link rel="stylesheet" href="{css_style_path}">'
+    
+    if config['enable_latex_math'] == 1:
+        header += headers.MDX_HTML_HEADER
+    if config['enable_mermaid_graphs'] == 1:
+        header += headers.MERMAID_HTML_HEADER
     header += '</header>\n<body>' 
     return header
 
@@ -56,7 +63,6 @@ def _extract_config(content_str:str)->tuple:
     else:
         #TODO: Handle bad json formatting
         config = json.loads(config_str) 
-    print(md_str)
     return config, md_str 
 
 def _handle_tags(config:dict)->None:
