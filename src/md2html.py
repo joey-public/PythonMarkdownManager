@@ -32,18 +32,6 @@ def _parse_args(argv:list)->list:
     html_dir_str = argv[2]
     return [md_file_str, html_dir_str]
 
-def _generate_html_header(config:dict)->str:
-    header = '<header>\n'
-    if config['css_style_path'] != '':
-        css_style_path = config['css_style_path']
-        header += f'<link rel="stylesheet" href="{css_style_path}">'
-    
-    if config['enable_latex_math'] == 1:
-        header += headers.MDX_HTML_HEADER
-    if config['enable_mermaid_graphs'] == 1:
-        header += headers.MERMAID_HTML_HEADER
-    header += '</header>\n<body>' 
-    return header
 
 def _extract_config(content_str:str)->tuple:
     content = content_str.splitlines()
@@ -64,6 +52,18 @@ def _extract_config(content_str:str)->tuple:
         #TODO: Handle bad json formatting
         config = json.loads(config_str) 
     return config, md_str 
+
+def _generate_html_header(config:dict)->str:
+    header = '<header>\n'
+    if config['css_style_path'] != '':
+        css_style_path = config['css_style_path']
+        header += f'<link rel="stylesheet" href="{css_style_path}">'
+    if config['enable_latex_math'] == 1:
+        header += headers.MDX_HTML_HEADER
+    if config['enable_mermaid_graphs'] == 1:
+        header += headers.MERMAID_HTML_HEADER
+    header += '</header>\n<body>' 
+    return header
 
 def _handle_tags(config:dict)->None:
     pass

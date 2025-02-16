@@ -18,3 +18,6 @@ MERMAID_HTML_HEADER = """
 </script>
 """
 
+GEOJSON_HEADER = """
+"""
+

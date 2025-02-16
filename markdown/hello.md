@@ -2,7 +2,7 @@
 {
     "enable_latex_math": 1,
     "enable_mermaid_graphs": 1,
-    "css_style_path": ""
+    "css_style_path": "hello.css"
 }
 ---config_end
 # Hello World 
