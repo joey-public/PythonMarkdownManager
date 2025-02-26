@@ -11,11 +11,24 @@ I see this the python markdown manager tool as a combination of several smaller 
 
 The top level `pmm.py` tool contains functionality supported by the following sub-tools:
 
+1. format_md.py
 1. md2html.py 
 1. multi_md2html.py
 1. site_gen.py 
 
 Each of these sub-tools can also be run independently from the command line.
+
+## format_md.py
+
+This tool takes the following inputs:
+
+    1. A file path to a single existing markdown file. 
+
+The tool will optionally perform the following formatting changes on the passed markdown file.
+
+    1. Auto-numbering of figures, tables, and equations
+    1. Add a TOC (fututre feature)
+    1. Add a Bibliography (future feature)
 
 ## md2html.py
 
@@ -35,7 +48,6 @@ The markdown to html conversion should support the following features for all co
     1. Basic Markdown syntax for Heading, bold text, italic, links, ect. All the stuff supported by default in the python markdown package with no plugins
     1. Code Blocks
     1. Tables
-    1. Auto-numbering of figures, tables, and equations
     1. auto-update absolute path links into relative links for `.html` files in the passed `html_dir`
     1. auto-update absolute path links to markdown files into links for their `.html` equivalent files
 
@@ -71,3 +83,4 @@ If a valid `website_directory` is provided and the `website_publish` options is 
 ## misc ideas
 
 - `project_readme_path`: copy this markdown file into a specific directory as a README.md file. I suggest you name the markdown file as `project_name_README.md` in the monolithic markdown folder.
+- `remove_configs.py`: another sub-tool that copies all the markdown files into a new directory, but removes all the custom config stuff. This way I can move away from my custom tool and into something like Obsideon at any time.
