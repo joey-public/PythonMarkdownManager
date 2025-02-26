@@ -1,10 +1,3 @@
----config_start
-{
-    "enable_latex_math": 1,
-    "enable_mermaid_graphs": 1,
-    "css_style_path": "hello.css"
-}
----config_end
 # Hello World 
 
 This is a test of my site generator.
@@ -30,3 +23,10 @@ A --> B
 B --> C
 ~~~
 
+---config_start
+{
+    "enable_latex_math": 1, 
+    "enable_mermaid_graphs": 1,
+    "css_style_path": "hello.css"
+}
+---config_end

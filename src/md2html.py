@@ -3,6 +3,7 @@ import os
 import json
 import markdown 
 from fileio import read_txt_file_content, save_str_to_file 
+from read_config import read_config
 import headers as headers
 
 EXTENSIONS=['fenced_code', 'tables', 'md_mermaid']
@@ -32,27 +33,6 @@ def _parse_args(argv:list)->list:
     html_dir_str = argv[2]
     return [md_file_str, html_dir_str]
 
-
-def _extract_config(content_str:str)->tuple:
-    content = content_str.splitlines()
-    config_str = ''
-    md_str = ''
-    for i, line in enumerate(content):
-        if i == 0 and not('config_start' in line):
-            config_str = ''
-            break
-        if 'config_end' in line:
-            md_str = '\n'.join(content[i+1:])
-            break
-        if i != 0:
-            config_str += line   
-    if config_str == '':
-        config = {}
-    else:
-        #TODO: Handle bad json formatting
-        config = json.loads(config_str) 
-    return config, md_str 
-
 def _generate_html_header(config:dict)->str:
     header = '<header>\n'
     if config['css_style_path'] != '':
@@ -65,24 +45,13 @@ def _generate_html_header(config:dict)->str:
     header += '</header>\n<body>' 
     return header
 
-def _handle_tags(config:dict)->None:
-    pass
-def _add_toc():
-    pass
-def _renumber_images():
-    pass
-def _renumber_tables():
-    pass
-def _fix_html_links():
-    pass
-
 def _generate_html_footer(config)->str:
     footer = '\n</body>'
     return footer
 
 def md2html(md_file_path:str, html_dir:str)->None:
     md_content_str = read_txt_file_content(md_file_path)
-    config, md_content_str = _extract_config(md_content_str)
+    config, md_content_str = read_config(md_content_str)
     html_header = _generate_html_header(config)
     html_body = markdown.markdown(md_content_str, extensions=EXTENSIONS)
     html_footer = _generate_html_footer(config)
