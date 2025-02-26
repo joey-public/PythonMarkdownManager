@@ -1,6 +1,6 @@
 # Hello World 
 
-This is a test of my site generator.
+This is a test of my site generator. I still have a bit more work to do on this.
 
 ## Latex Math
 
