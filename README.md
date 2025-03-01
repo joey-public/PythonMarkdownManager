@@ -52,8 +52,6 @@ The markdown to html conversion should support the following features for all co
     1. Basic Markdown syntax for Heading, bold text, italic, links, ect. All the stuff supported by default in the python markdown package with no plugins
     1. Code Blocks
     1. Tables
-    1. auto-update absolute path links into relative links for `.html` files in the passed `html_dir`
-    1. auto-update absolute path links to markdown files into links for their `.html` equivalent files
 
 It should also optionally support these features. The features on this list should be optional on a per-markdown file basis. They can be enabled or disabled in the previously mentioned config string at the bottom of each markdown file.
 
