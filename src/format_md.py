@@ -2,25 +2,31 @@ import argparse
 import re
 import fileio as fileio
 
+
+#figure_regex = r'\*\*Figure \d+:\*\*'
+def _pattern_sub(md_file_content:str, type_str:str):
+    pattern = r'\*\*' + type_str + r' \d+:\*\*'
+    strings = re.split(pattern, md_file_content)
+    return_str = ''
+    for i, str_ in enumerate(strings):
+        return_str += str_ 
+        if i < len(strings)-1: 
+            return_str += f'**{type_str} {i+1}:**'
+    return return_str
 def _renumber(md_file_content:str, renumber_all=False,renumber_figures=False, 
                 renumber_tables=False, renumber_equations=False)->str:
     if not(renumber_all or renumber_figures or renumber_tables or renumber_equations):
         return md_file_content 
-    figure_regex = r'\*\*Figure \d+:\*\*'
-    table_regex = r'\*\*Table \d+:\*\*'
-    equation_regex = r'\*\*Equation \d+:\*\*'
     if renumber_all:
         renumber_figures = True
         renumber_tables = True
         renumber_equations = True
     if renumber_figures:
-        pass
+        md_file_content = _pattern_sub(md_file_content, 'Figure')
     if renumber_tables:
-        pass
-    if renumber_equations: #TODO fix this
-        strings = re.split(equation_regex, md_file_content)
-        for i, str_ in enumerate(strings):
-            print(str_)
+        md_file_content = _pattern_sub(md_file_content, 'Table')
+    if renumber_equations: 
+        md_file_content = _pattern_sub(md_file_content, 'Equation')
     return md_file_content 
 
 def format_md(md_file_content:str, output_md_file:str='./out.md', renumber_all=False, 

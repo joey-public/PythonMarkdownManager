@@ -31,6 +31,8 @@ The tool will optionally perform the following formatting changes on the passed 
     1. (?-separate script) Add a TOC (future feature) 
     1. (?-separate script) Add a Bibliography (future feature)
 
+In the future I want to think of some way to only reformat a markdown file that has actually changed. For now I will just reformat all my notes, but this won't scale as well to large note folders.
+
 ## md2html.py
 
 This is the heavy lifter of the whole project. This script takes in the following as cli inputs:

@@ -2,6 +2,12 @@
 
 This is a test of my site generator. I still have a bit more work to do on this.
 
+## Images
+
+**Figure 1:** hello
+
+**Figure 2:** world
+
 ## Latex Math
 
 This is inline math $a^2 + b^2 = c^2$
@@ -24,7 +30,7 @@ $$
 \int_{a}^{b} f^{'} (t) dt = f(b) - f(a) \tag{1}
 $$
 
-**Equation 1:** Fundamental Theorem of Calculus
+**Equation 3:** Fundamental Theorem of Calculus
 
 
 ## Mermaid Graphs
@@ -34,6 +40,8 @@ graph TB
 A --> B
 B --> C
 ~~~
+
+**Figure 3:** Mermaid graph example
 
 ---config_start
 {
