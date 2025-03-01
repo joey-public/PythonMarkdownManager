@@ -27,8 +27,9 @@ This tool takes the following inputs:
 The tool will optionally perform the following formatting changes on the passed markdown file.
 
     1. Auto-numbering of figures, tables, and equations
-    1. Add a TOC (fututre feature)
-    1. Add a Bibliography (future feature)
+    1. Replace markdown links with html links
+    1. (?-separate script) Add a TOC (future feature) 
+    1. (?-separate script) Add a Bibliography (future feature)
 
 ## md2html.py
 
