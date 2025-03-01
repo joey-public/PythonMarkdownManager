@@ -11,11 +11,11 @@ I see this the python markdown manager tool as a combination of several smaller 
 
 The top level `pmm.py` tool contains functionality supported by the following sub-tools:
 
-1. format_md.py: Pre-process a markdown file before converting to html.
-1. md2html.py: Convert the markdown into html.
-1. format_html.py: Post-process the generated html file.
-1. multi_md2html.py: Run the first 3 scripts on an entire folder of markdown files.
-1. site_gen.py: Move specially tagged html files into separate directories.
+1. `format_md.py`: Pre-process a markdown file before converting to html.
+1. `md2html.py`: Convert the markdown into html.
+1. `format_html.py`: Post-process the generated html file.
+1. `multi_md2html.py`: Run the first 3 scripts on an entire folder of markdown files.
+1. `site_gen.py`: Move specially tagged html files into separate directories.
 
 Each of these sub-tools can also be run independently from the command line.
 
