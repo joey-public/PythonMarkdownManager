@@ -14,6 +14,7 @@ def read_config(content_str:str)->dict:
         elif 'config_end' in line:
             break
         elif reading_config:
+#            print(f'{i}: {line}')
             config_str += line
         else:
             md_str += '\n' + line

@@ -2,7 +2,6 @@ import argparse
 import re
 import fileio as fileio
 
-
 #figure_regex = r'\*\*Figure \d+:\*\*'
 def _pattern_sub(md_file_content:str, type_str:str):
     pattern = r'\*\*' + type_str + r' \d+:\*\*'
@@ -13,6 +12,7 @@ def _pattern_sub(md_file_content:str, type_str:str):
         if i < len(strings)-1: 
             return_str += f'**{type_str} {i+1}:**'
     return return_str
+
 def _renumber(md_file_content:str, renumber_all=False,renumber_figures=False, 
                 renumber_tables=False, renumber_equations=False)->str:
     if not(renumber_all or renumber_figures or renumber_tables or renumber_equations):
@@ -29,11 +29,14 @@ def _renumber(md_file_content:str, renumber_all=False,renumber_figures=False,
         md_file_content = _pattern_sub(md_file_content, 'Equation')
     return md_file_content 
 
-def format_md(md_file_content:str, output_md_file:str='./out.md', renumber_all=False, 
+def format_md(md_file_content:str, output_md_files:list=['./out.md'], renumber_all=False, 
               renumber_figures = False, renumber_tables=False, renumber_equations=False):
     print(f'formatting mardown file:')
     md_file_content = _renumber(md_file_content, renumber_all, renumber_figures, renumber_tables, renumber_equations)
-    fileio.save_str_to_file(output_md_file, md_file_content)
+    for path in output_md_files:
+        #TODO: (future) fix links to md files that might break from this. 
+        print(path)
+        fileio.save_str_to_file(path, md_file_content)
 
 def main(args)->None:
     args = vars(args) #convert Namespace to dict
@@ -48,11 +51,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('input_md_file', 
                         help='The path to the markdown file to be formatted.', 
-                        type=str)
-    parser.add_argument('-o', '--output_md_file', 
+                        type=str) 
+    parser.add_argument('-o', '--output_md_files', 
                         help='The path to output file to write the formatted results. Uses out.md as the default. You can enter the name of the input file here and it will be overwritten.', 
-                        type=str,
-                        default = './out.md')
+                        nargs='+', 
+                        default = ['./out.md'])
     parser.add_argument('-rn', '--renumber_all', 
                         help='Renumbers all figures, tables, and equations in file from 1 to N.',
                         action='store_true')

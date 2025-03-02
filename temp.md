@@ -51,12 +51,12 @@ B --> C
     "renumber_figures": 0, 
     "renumber_tables": 0,
     "renumber_equations": 0,
-    "output_md_path":"",
+    "output_md_path":'',
     "enable_latex_math": 1, 
     "enable_mermaid_graphs": 1,
     "css_style_path": "hello.css",
     "replace_md_file_links": 1,
-    "output_html_file": "", 
-    "html_dir": [""]
+    "output_html_file": '', 
+    "html_dir": []
 }
 ---config_end

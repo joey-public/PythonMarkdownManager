@@ -100,3 +100,22 @@ If a valid `website_directory` is provided and the `website_publish` options is 
 
 - `project_readme_path`: copy this markdown file into a specific directory as a README.md file. I suggest you name the markdown file as `project_name_README.md` in the monolithic markdown folder.
 - `remove_configs.py`: another sub-tool that copies all the markdown files into a new directory, but removes all the custom config stuff. This way I can move away from my custom tool and into something like Obsideon at any time.
+
+## Config Options
+
+### preprocessing options
+- `renumber_all`: (default = 0)
+- `renumber_figures`: (default = 0) 
+- `renumber_tables`: (default = 0)
+- `renumber_equations`: (default = 0)
+- `output_md_path`: (default ='')
+
+### md2html options
+- `enable_latex_math`: (default = 1) 
+- `enable_mermaid_graphs`: (default = 1)
+- `css_style_path`: (default = `hello.css`)
+- `output_html_file`: (default = '') 
+
+### postprocessing options
+- `replace_md_file_links`: Replace all links to .md files with links to html files. (default = 1)
+- `html_dirs`: A list of directories to copy the post-processed html file.(default = [])
