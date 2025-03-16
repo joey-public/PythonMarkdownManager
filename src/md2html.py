@@ -53,33 +53,33 @@ def _generate_html_footer(config)->str:
     footer = '\n</body>'
     return footer
 
-def md2html(md_file_path:str, html_dir:str)->None:
+def md2html(md_file_path:str, html_file_path:str)->None:
     md_content_str = read_txt_file_content(md_file_path)
     config, md_content_str = read_config(md_content_str)
     html_header = _generate_html_header(config)
     html_body = markdown.markdown(md_content_str, extensions=EXTENSIONS)
     html_footer = _generate_html_footer(config)
     html_content_str = html_header + html_body + html_footer
-    html_file_name = os.path.splitext(os.path.basename(md_file_path))[0]
-    html_file_path = html_dir + html_file_name + '.html'
+#    html_file_name = os.path.splitext(os.path.basename(md_file_path))[0]
+#    html_file_path = html_dir + html_file_name + '.html'
     save_str_to_file(html_file_path, html_content_str)
     
 def main(args)->None:
     args = vars(args)
-    if arg_list == []: 
-        print('Error while parsing input arguments')
-        return 
-    md_file_path = arg_list[0]
-    html_dir = arg_list[1]
-    md2html(md_file_path, html_dir)
+    md_file_path = args.pop('input_md_file', None)
+    html_file_path = args.pop('output_html_file', None)
+    #TODO: make sure md_file_path is valid
+    #TODO: set default html_file based on md_file name and path
+    #TODO: make sure html_file_path is valid
+    md2html(md_file_path, html_file_path)
 
 if __name__=='__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('input_md_file', 
                         help = 'The path to the input markdown file.', 
                         type = str) 
-    parser.add_argument('-o', '--output_html_file', 
-                        help = 'The path to the output html file.'
+    parser.add_argument('output_html_file', 
+                        help = 'The path to the output html file.', 
                         type = str)
     args = parser.parse_args()
     main(args)

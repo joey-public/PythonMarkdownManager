@@ -1,6 +1,12 @@
 import os
 import subprocess as sbp
 
+def _is_valid_directory(dir:str)->bool:
+    pass
+
+def _is_valid_file(path:str, ftype:str)->bool:
+    pass
+
 def _get_file_name_from_path(path:str)->str:
     return os.path.splittext(os.path.basename(path))[0]
 
