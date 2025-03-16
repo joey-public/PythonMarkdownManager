@@ -53,7 +53,10 @@ def _generate_html_footer(config)->str:
     footer = '\n</body>'
     return footer
 
-def md2html(md_file_path:str, html_file_path:str)->None:
+def md2html(md_file_path:str, html_file_path:str=None)->None:
+    if html_file_path == None:
+        html_file_name = os.path.splitext(os.path.basename(md_file_path))[0]
+        html_file_path = output_html_dir + html_file_name + '.html'
     md_content_str = read_txt_file_content(md_file_path)
     config, md_content_str = read_config(md_content_str)
     html_header = _generate_html_header(config)
