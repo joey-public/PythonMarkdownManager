@@ -3,7 +3,7 @@ import re
 import fileio as fileio
 
 
-def format_html(html_file_content:str, output_html_files:str=['./out.md'], replace_md_links=False):
+def format_html(html_file_content:str, output_html_files:str=['./out.html'], replace_md_links=False):
     print(f'formatting html file:')
     for path in output_html_files:
         fileio.save_str_to_file(path, html_file_content) 

@@ -29,8 +29,9 @@ def _renumber(md_file_content:str, renumber_all=False,renumber_figures=False,
         md_file_content = _pattern_sub(md_file_content, 'Equation')
     return md_file_content 
 
-def format_md(md_file_content:str, output_md_files:list=['./out.md'], renumber_all=False, 
-              renumber_figures = False, renumber_tables=False, renumber_equations=False):
+def format_md(md_file_content:str, output_md_files:list=['./out.md'], 
+                renumber_all=False, renumber_figures = False, 
+                renumber_tables=False, renumber_equations=False)->None:
     print(f'formatting mardown file:')
     md_file_content = _renumber(md_file_content, renumber_all, renumber_figures, renumber_tables, renumber_equations)
     for path in output_md_files:

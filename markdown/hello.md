@@ -45,18 +45,18 @@ B --> C
 
 **Figure 3:** Mermaid graph example
 
----config_start
+---config_start---
 {
     "renumber_all": 0,
     "renumber_figures": 0, 
     "renumber_tables": 0,
     "renumber_equations": 0,
-    "output_md_path":"",
+    "output_md_path":[""],
     "enable_latex_math": 1, 
     "enable_mermaid_graphs": 1,
     "css_style_path": "hello.css",
     "replace_md_file_links": 1,
-    "output_html_file": "", 
+    "output_html_files": [""], 
     "html_dir": [""]
 }
----config_end
+---config_end---

@@ -5,34 +5,11 @@ import argparse
 import markdown 
 from fileio import read_txt_file_content, save_str_to_file 
 from read_config import read_config
+from format_md import format_md
+from format_html import format_html
 import headers as headers
 
 EXTENSIONS=['fenced_code', 'tables', 'md_mermaid']
-
-#def _parse_args(argv:list)->list:
-#    usage_str = 'usage: python md2html.py <input.md> <output_dir>'
-#    n_args=len(argv)
-#    expected_n_args = 3
-#    if not(n_args==expected_n_args):
-#        print(f'Error: Arguments Incorrect:\n    {usage_str}')
-#        return []
-#    md_file_exisits = os.path.isfile(argv[1])
-#    md_file_valid = os.path.splitext(argv[1])[1]=='.md'
-#    if not(md_file_exisits): 
-#        print(f'Error: {argv[1]} md file does not exist:\n    {usage_str}')
-#        return []
-#    if not(md_file_valid):
-#        print(f'Error: {argv[1]} is not a md file:\n    {usage_str}')
-#        return []
-#    # make sure the html dir is valid and exists already
-#    html_dir_exists = os.path.isdir(argv[2])
-#    if not(html_dir_exists):
-#        print(f'Error: {argv[2]} is not an existing directory :\n    {usage_str}')
-#        return []
-#    #If we make it here we know both arguments are good
-#    md_file_str = argv[1]
-#    html_dir_str = argv[2]
-#    return [md_file_str, html_dir_str]
 
 def _generate_html_header(config:dict)->str:
     header = '<header>\n'
@@ -59,6 +36,7 @@ def md2html(md_file_path:str, html_file_path:str=None)->None:
         html_file_path = output_html_dir + html_file_name + '.html'
     md_content_str = read_txt_file_content(md_file_path)
     config, md_content_str = read_config(md_content_str)
+#    format_md(md_content_str, config. 
     html_header = _generate_html_header(config)
     html_body = markdown.markdown(md_content_str, extensions=EXTENSIONS)
     html_footer = _generate_html_footer(config)
