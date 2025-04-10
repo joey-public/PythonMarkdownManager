@@ -1,8 +1,10 @@
-# Hello World 
+# Hello World 3
 
 This is a test of my site generator. I still have a bit more work to do on this.
 
 [link to another file](~/Documents/PythonMarkdownManager/markdown/hello2.md)
+
+[link back to hello](~/Documents/PythonMarkdownManager/markdown/hello.md)
 
 ## Images
 
@@ -51,9 +53,9 @@ B --> C
     "format_md_args": {},
     "convert_to_html": 1, 
     "md2html_args": {
-        "output_html_files": ["./test.html", "./test2.html"],
-        "enable_latex_math": 0, 
-        "enable_mermaid_graphs": 0,
+        "output_html_files": ["./test3.html"],
+        "enable_latex_math": 1, 
+        "enable_mermaid_graphs": 1,
         "css_style_path":""
     },
     "format_html": 1,

@@ -3,6 +3,7 @@ import glob
 
 from fileio import read_txt_file_content, save_str_to_file 
 from read_config import read_config
+from md2html import md2html
 
 def main(args):
     args = vars(args) 
@@ -13,19 +14,23 @@ def main(args):
         config, content_str = read_config(read_txt_file_content(md_file_path))
         if config == {}:
             config = {'format_md':0, 'convert_to_html':0, 'format_html':0}
-        print(f'...config: {config}')
+        #print(f'...config: {config}')
         if config['format_md'] == 1:
-            print('formatting markdown')
+            print('...formatting markdown')
             args = config['format_md_args']
             #TODO: implement format_md
         if config['convert_to_html'] == 1:
-            print('converting md to html')
+            print('...converting md to html')
             args = config['md2html_args']
+            content_str = md2html(content_str, **args)
+            for html_file_path in args['output_html_files']:
+                #TODO: make sure all the paths are valid
+                save_str_to_file(html_file_path, content_str)
             #TODO: implement md2html 
-        if config['format_html'] == 1:
-            print('formatting html')
-            args = config['format_html_args']
-            #TODO: implement format_html 
+#        if config['format_html'] == 1:
+#            print('formatting html')
+#            args = config['format_html_args']
+#            #TODO: implement format_html 
             
      
 
