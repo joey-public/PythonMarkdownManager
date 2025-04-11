@@ -6,7 +6,6 @@ import markdown
 from fileio import read_txt_file_content, save_str_to_file 
 from read_config import read_config
 from format_md import format_md
-from format_html import format_html
 import headers as headers
 
 EXTENSIONS=['fenced_code', 'tables', 'md_mermaid']

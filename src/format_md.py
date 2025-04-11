@@ -1,4 +1,3 @@
-import argparse
 import re
 import fileio as fileio
 
@@ -22,53 +21,14 @@ def _renumber(md_file_content:str, args:dict)->str:
 
 def _replace_md_links(md_file_content:str, args)->str:
     if not('replace_md_links' in args.keys()):
-        print('replace_md_links NOT FOUND')
         return md_file_content
     if args['replace_md_links']==False:
-        print('replace_md_links IS FALSE')
         return md_file_content
-    print('replace_md_links IS TRUE')
     pattern = r'(\[.*?\])(\(.*?)\.md\)'
     repl_with = r'\1\2.html)'
     return re.sub(pattern, repl_with, md_file_content)
 
 def format_md(md_file_content, **kwargs)->str:
-    print(f'formatting mardown file:')
     md_file_content = _replace_md_links(md_file_content, kwargs) 
     md_file_content = _renumber(md_file_content, kwargs)
-#    print(md_file_content)
     return md_file_content
-
-def main(args)->None:
-    args = vars(args) #convert Namespace to dict
-    input_path = args.pop('input_md_file', None)
-    if input_path == None:
-        return 
-    #TODO: make sure input path is ok...
-    md_content_str = fileio.read_txt_file_content(input_path)
-    format_md(md_content_str, **args)
-
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('input_md_file', 
-                        help='The path to the markdown file to be formatted.', 
-                        type=str) 
-    parser.add_argument('-o', '--output_md_files', 
-                        help='The path to output file to write the formatted results. Uses out.md as the default. You can enter the name of the input file here and it will be overwritten.', 
-                        nargs='+', 
-                        default = ['./out.md'])
-    parser.add_argument('-rn', '--renumber_all', 
-                        help='Renumbers all figures, tables, and equations in file from 1 to N.',
-                        action='store_true')
-    parser.add_argument('-rn_f', '--renumber_figures', 
-                        help='Renumbers all figures in file from 1 to N.',
-                        action='store_true')
-    parser.add_argument('-rn_t', '--renumber_tables', 
-                        help='Renumbers all tables in file from 1 to N.',
-                        action='store_true')
-    parser.add_argument('-rn_e', '--renumber_equations', 
-                        help='Renumbers all equations in file from 1 to N.',
-                        action='store_true')
-    parser.add_argument('')
-    args = parser.parse_args()
-    main(args)
