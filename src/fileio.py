@@ -16,6 +16,8 @@ def read_txt_file_content(path:str)->str:
     return txt_str
 
 def save_str_to_file(path:str, content:str)->None:
+    if '~' in path:
+        path = os.path.expanduser(path)
     with open(path, 'w', encoding='utf-8', errors='xmlcharrefreplace') as output_file:
         output_file.write(content)
 

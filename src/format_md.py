@@ -3,41 +3,41 @@ import re
 import fileio as fileio
 
 #figure_regex = r'\*\*Figure \d+:\*\*'
-def _pattern_sub(md_file_content:str, type_str:str):
-    pattern = r'\*\*' + type_str + r' \d+:\*\*'
-    strings = re.split(pattern, md_file_content)
-    return_str = ''
-    for i, str_ in enumerate(strings):
-        return_str += str_ 
-        if i < len(strings)-1: 
-            return_str += f'**{type_str} {i+1}:**'
-    return return_str
+#TODO: this can be done using one line and groups in the re.sub call. 
+#      see _replace_md_links for an example
+def _renumber(md_file_content:str, args:dict)->str:
+    renumber_all = False
+    renumber_figures = False
+    renumber_tables = False
+    renumber_equations = False
+    if 'renumber_all' in args.keys():
+        renumber_all = args['renumber_all']
+    if 'renumber_figures' in args.keys():
+        renumber_figures = args['renumber_figures']
+    if 'renumber_tables' in args.keys():
+        renumber_tables = args['renumber_tables']
+    if 'renumber_equations' in args.keys():
+        renumber_equations = args['renumber_equations']
+    return md_file_content
 
-def _renumber(md_file_content:str, renumber_all=False,renumber_figures=False, 
-                renumber_tables=False, renumber_equations=False)->str:
-    if not(renumber_all or renumber_figures or renumber_tables or renumber_equations):
-        return md_file_content 
-    if renumber_all:
-        renumber_figures = True
-        renumber_tables = True
-        renumber_equations = True
-    if renumber_figures:
-        md_file_content = _pattern_sub(md_file_content, 'Figure')
-    if renumber_tables:
-        md_file_content = _pattern_sub(md_file_content, 'Table')
-    if renumber_equations: 
-        md_file_content = _pattern_sub(md_file_content, 'Equation')
-    return md_file_content 
+def _replace_md_links(md_file_content:str, args)->str:
+    if not('replace_md_links' in args.keys()):
+        print('replace_md_links NOT FOUND')
+        return md_file_content
+    if args['replace_md_links']==False:
+        print('replace_md_links IS FALSE')
+        return md_file_content
+    print('replace_md_links IS TRUE')
+    pattern = r'(\[.*?\])(\(.*?)\.md\)'
+    repl_with = r'\1\2.html)'
+    return re.sub(pattern, repl_with, md_file_content)
 
-def format_md(md_file_content:str, output_md_files:list=['./out.md'], 
-                renumber_all=False, renumber_figures = False, 
-                renumber_tables=False, renumber_equations=False)->None:
+def format_md(md_file_content, **kwargs)->str:
     print(f'formatting mardown file:')
-    md_file_content = _renumber(md_file_content, renumber_all, renumber_figures, renumber_tables, renumber_equations)
-    for path in output_md_files:
-        #TODO: (future) fix links to md files that might break from this. 
-        print(path)
-        fileio.save_str_to_file(path, md_file_content)
+    md_file_content = _replace_md_links(md_file_content, kwargs) 
+    md_file_content = _renumber(md_file_content, kwargs)
+#    print(md_file_content)
+    return md_file_content
 
 def main(args)->None:
     args = vars(args) #convert Namespace to dict
@@ -69,5 +69,6 @@ if __name__ == '__main__':
     parser.add_argument('-rn_e', '--renumber_equations', 
                         help='Renumbers all equations in file from 1 to N.',
                         action='store_true')
+    parser.add_argument('')
     args = parser.parse_args()
     main(args)
